@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试七牛上传</title>
+</head>
+	<link rel="stylesheet" href="common/antimate.css">
+	<script src="common/zepto.js"></script>
+	<style>
+		.ceshi{
+			height:200px;
+			width:200px;
+			background-color: red;
+
+		}
+	</style>
+
+<body>
+	<!-- <img src="http://onkjnlpgh.bkt.clouddn.com/my-nodejs.jpg" alt=""> -->
+	<input type="file" id = "inputfile" onchange="loadimglocal(this)">
+	<div class="ceshi animated zoomOutDown"></div>
+
+</body>
+<script>
+	// var img=new Image();
+	// img.onload=function(){alert("img is loaded")};
+	// img.onerror=function(e){console.log(e)};  
+    // img.src="http://onkjnlpgh.bkt.clouddn.com/my-nodejs.jpg"; 
+    // img.src="../12.jpg"; 
+
+    // img.id="id" ;
+    // function show(){
+    // 	// alert("body is loaded");
+    // 	 document.body.appendChild(img);
+    // 	 var myImg = document.getElementById("id");
+    // 	 console.log(myImg.src);
+    // };  
+    // window.onload=show;
+
+
+    function loadimglocal(inputfile){
+    	 // var inputfile = document.getElementById("inputfile");
+
+    	//  console.log(inputfile.files)
+     //      var reader = new FileReader();
+
+     //      console.log(reader)
+     //      reader.onload = function(evt){
+     //      	console.log(evt)
+     //      		img.src = evt.target.result;
+     //      }
+
+     //      reader.readAsDataURL(inputfile.files[0]);
+
+    	// this.files = this.input.files;
+    	// console.log(12312)
+    	// console.log(e)
+
+    	var file = inputfile.files[0];
+    	console.log(file)
+
+    	var formData = new FormData();
+    	formData.append('upload', file);
+    	 var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/upimage');
+
+        xhr.onload = function () {
+　　　　　　if (xhr.status === 200) {
+　　　　　　　　console.log('上传成功');
+                // console.log(xhr.response);
+                // var imgpath = that.state.imgpath;
+                // imgpath.push(xhr.response);
+
+                // that.setState({
+                //     imgpath:imgpath,
+                //     isimgpath:true
+                // })
+　　　　　　} else {
+　　　　　　　　console.log('出错了');
+　　　　　　}
+　　　　};
+　　　　xhr.send(formData);
+
+    }
+
+    setInterval(abcati,1000)
+
+    function abcati(){
+    	if($('.ceshi').hasClass('zoomOutDown')){
+    		$('.ceshi').removeClass('zoomOutDown').addClass('zoomInDown')
+    	}else{
+    		$('.ceshi').removeClass('zoomInDown').addClass('zoomOutDown')
+
+    	}
+
+    }
+	
+</script>
+</html>
